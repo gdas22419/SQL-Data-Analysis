@@ -1,34 +1,68 @@
-Notepad++ v8.4.7 bug-fixes and new features:
-
-1.  Fix empty session issue due to forced Windows update restart.
-2.  Fix printing with extra background colors issue due to Change History.
-3.  Update to Scintilla 5.3.1 and Lexilla 5.2.0.
-4.  Updated nlohmann json to 3.11.2 and Boost to 1.80.0.
-5.  Make large file restriction configurable.
-6.  Optimizing open/save large files time.
-7.  Remember Column Editor settings through the sessions.
-8.  Fix plugin admin search issue.
-9.  Installer enhancement: prevent arm64 installer from installing on non ARM64 system.
-10. Installer enhancement: remember "Don't use_%APPDATA%" option.
-11. Add new API NPPM_GETBOOKMARKID for getting bookmark ID.
-12. Enhance "Go To" dialog: update line/position data dynamically.
-13. Fix lines hiding issue.
-14. Fix language detected from content not applied if default language is set.
-15. Fix long filters get truncated in Find in Files feature.
-16. Add ESC Key for aborting "Move to Recycle Bin" confirmation prompt.
+/*
+joins
+(INNER) JOIN: Returns records that have matching values in both tables
+LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+*/
 
 
-Get more info on
-https://notepad-plus-plus.org/downloads/v8.4.7/
+USE DEMO_DATABASE;
 
+SELECT * FROM "DEMO_DATABASE"."PUBLIC"."BROKER";
+SELECT * FROM "DEMO_DATABASE"."PUBLIC"."MKS_COMPLAIN";
+SELECT * FROM "DEMO_DATABASE"."PUBLIC"."PRODUCT";
 
-Included plugins:
+--- INNER JOIN
+--- The INNER JOIN keyword selects records that have matching values in both tables.
+SELECT * FROM PRODUCT AS PR
+INNER JOIN MKS_COMPLAIN AS MKS
+ON PR.PRODUCT_ID = MKS.BROKERID;
 
-1.  NppExport v0.4
-2.  Converter v4.5
-3.  Mime Tool v2.9
+--- LEFT JOIN
+SELECT * FROM PRODUCT AS PR
+LEFT JOIN MKS_COMPLAIN AS MKS
+ON PR.PRODUCT_ID = MKS.BROKERID;
 
+/*
+The LEFT JOIN keyword returns all records from the left table (table1),
+and the matching records from the right table (table2). 
+The result is 0 records from the right side, if there is no match.
+*/
 
-Updater (Installer only):
+--- RIGHT JOIN
+SELECT * FROM PRODUCT AS PR
+RIGHT JOIN MKS_COMPLAIN AS MKS
+ON PR.PRODUCT_ID = MKS.BROKERID;
+/*
+The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records
+from the left table (table1). The result is 0 records from the left side, if there is no match.
+*/
 
-* WinGup (for Notepad++) v5.2.4
+--- FULL JOIN
+SELECT * FROM PRODUCT AS PR
+FULL JOIN MKS_COMPLAIN AS MKS
+ON PR.PRODUCT_ID = MKS.BROKERID;
+
+/* The FULL OUTER JOIN keyword returns all records 
+when there is a match in left (table1) or right (table2) table records.
+*/
+
+--- UNION OPERATER
+/*
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+
+Every SELECT statement within UNION must have the same number of columns
+The columns must also have similar data types
+The columns in every SELECT statement must also be in the same order
+*/
+
+--- GROUP BY 
+SELECT BROKERID,COUNT(*) `COUNT` FROM "DEMO_DATABASE"."PUBLIC"."MKS_COMPLAIN"
+GROUP BY BROKERID ;
+
+--- HAVING CLAUSE
+/*
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+*/
+
