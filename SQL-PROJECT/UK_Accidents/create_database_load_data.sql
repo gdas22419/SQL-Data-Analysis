@@ -80,3 +80,17 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+Create table vehicle_type
+(
+code int,
+label varchar(30)
+);
+
+LOAD DATA  INFILE 
+'G:\vehicle_type.csv'
+INTO table ACCIDENT_2015
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
